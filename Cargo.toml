@@ -1,0 +1,11 @@
+[package]
+name = "ternary-cli"
+version = "0.1.0"
+edition = "2021"
+description = "CLI for the ternary agent ecosystem — evolve, classify, benchmark, verify, visualize"
+license = "MIT"
+repository = "https://github.com/SuperInstance/ternary-cli"
+
+[[bin]]
+name = "ternary"
+path = "src/main.rs"
