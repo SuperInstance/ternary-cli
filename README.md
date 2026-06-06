@@ -1,87 +1,55 @@
 # ternary-cli
 
-Command-line interface for the **ternary agent ecosystem** — a terminal tool for running experiments, visualizing results, and exploring ternary agent theory.
+CLI tools for the ternary computing ecosystem. Inspect, validate, and benchmark Z₃ {-1, 0, +1} operations from the command line.
+
+## Why This Matters
+
+The ternary ecosystem spans 300+ crates covering everything from neural networks to distributed consensus. This CLI gives you hands-on access to Z₃ operations — inspect ternary states, validate conservation laws, and benchmark ternary vs binary performance.
+
+## The Five-Layer Stack
+
+```
+┌─────────────────┐
+│  cudaclaw        │  Persistent GPU kernels, warp consensus, SmartCRDT
+├─────────────────┤
+│  cuda-oxide      │  Flux → MIR → Pliron → NVVM → PTX compiler
+├─────────────────┤
+│  flux-core       │  Bytecode VM + A2A agent protocol
+├─────────────────┤
+│  pincher         │  "Vector DB as runtime, LLM as compiler"
+├─────────────────┤
+│  open-parallel   │  Async runtime (tokio fork)
+└─────────────────┘
+```
 
 ## Installation
 
 ```bash
-cargo install --path .
+cargo install ternary-cli
 ```
 
 ## Usage
 
-### Evolve
-
-Run an evolution experiment with progress display:
-
 ```bash
-ternary evolve --generations 500 --population 100
-ternary evolve -g 200 -p 50 --mutation-rate 0.05
+# Inspect a ternary value
+ternary inspect --value 1
+ternary inspect --value -1
+ternary inspect --value 0
+
+# Validate conservation
+ternary validate --check conservation
+
+# Benchmark ternary vs binary
+ternary benchmark --operations 10000
 ```
 
-### Classify
+## Stats
 
-Classify strategies from a data file:
-
-```bash
-ternary classify data.csv
-ternary classify input.txt --format csv
-```
-
-### Benchmark
-
-Run benchmarks and display results:
-
-```bash
-ternary benchmark
-ternary benchmark --iterations 10000 --strategy all
-```
-
-### Verify
-
-Verify conservation laws at multiple scales:
-
-```bash
-ternary verify
-ternary verify --scales 3,5,7 --tolerance 1e-9
-```
-
-### Visualize
-
-Generate ASCII visualizations in the terminal:
-
-```bash
-ternary visualize
-ternary visualize --type fitness-landscape --width 80
-ternary visualize --type phase-space --height 40
-```
-
-### Global Options
-
-```bash
-ternary --help
-ternary --version
-ternary --config custom.toml evolve
-```
-
-## Configuration
-
-Create a `ternary.toml` file in the current directory or pass `--config <path>`:
-
-```toml
-[evolve]
-generations = 1000
-population = 200
-mutation_rate = 0.02
-
-[benchmark]
-iterations = 50000
-
-[visualize]
-width = 80
-height = 24
-```
+| Metric | Value |
+|--------|-------|
+| LOC | 1423 |
+| Tests | 39 |
 
 ## License
 
-MIT
+Apache-2.0
